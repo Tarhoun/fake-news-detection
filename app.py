@@ -1,12 +1,31 @@
-import streamlit as st
+import subprocess
+import sys
+
+# --- حيلة ذكية لصب المكتبات غصباً عن السيرفر في الأول ---
+try:
+    import streamlit as st
+    import sklearn
+    import nltk
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "scikit-learn", "nltk"])
+    import streamlit as st
+
 import pickle
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
 
-nltk.download('stopwords')
-nltk.download('wordnet')
+# تحميل ملفات الـ NLTK الضرورية للـ Cloud
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
 
 # Chargement des objets sauvegardés
 tfidf = pickle.load(open('tfidf.pkl', 'rb'))
