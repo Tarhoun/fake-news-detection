@@ -1,20 +1,9 @@
-import subprocess
-import sys
-
-# --- حيلة ذكية لصب المكتبات غصباً عن السيرفر في الأول ---
-try:
-    import streamlit as st
-    import sklearn
-    import nltk
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "scikit-learn", "nltk"])
-    import streamlit as st
-
+import streamlit as st
 import pickle
 import re
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import nltk
 
 # تحميل ملفات الـ NLTK الضرورية للـ Cloud
 try:
