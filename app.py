@@ -1,7 +1,20 @@
-import streamlit as st
+import os
+import sys
+
+# --- صب المكتبات إجبارياً في الخلفية من غير ما يفيق السيرفر ---
+try:
+    import streamlit as st
+    import sklearn
+    import nltk
+except ImportError:
+    # استعمال أمر صامت وسريع لصب المكتبات للـ User الحالي
+    os.system(f"{sys.executable} -m pip install --quiet scikit-learn nltk")
+    import streamlit as st
+    import sklearn
+    import nltk
+
 import pickle
 import re
-import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
